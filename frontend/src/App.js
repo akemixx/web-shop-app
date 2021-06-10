@@ -5,6 +5,7 @@ import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -16,7 +17,7 @@ function App() {
   const signOutHandler = () => {
     dispatch(signOut());
   };
-  
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -53,6 +54,7 @@ function App() {
           <Route path="/" component={HomePage} exact />
           <Route path="/product/:id" component={ProductPage} />
           <Route path="/signIn" component={SignInPage} />
+          <Route path="/signUp" component={SignUpPage} />
           <Route path="/cart/:id?" component={CartPage} />
         </main>
         <footer className="row center">All rights reserved</footer>
