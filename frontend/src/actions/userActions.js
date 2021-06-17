@@ -32,6 +32,8 @@ export const signIn = (email, password) => async (dispatch) => {
 export const signOut = () => async (dispatch) => {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("cartItems");
+  localStorage.removeItem("shippingAddress");
+  localStorage.removeItem("paymentMethod");
   dispatch({ type: USER_SIGN_OUT });
 };
 
@@ -41,7 +43,11 @@ export const signUp = (name, email, password) => async (dispatch) => {
     payload: { name, email, password },
   });
   try {
-    const { data } = await axios.post("api/users/signUp", { name, email, password });
+    const { data } = await axios.post("api/users/signUp", {
+      name,
+      email,
+      password,
+    });
     dispatch({ type: USER_SIGN_UP_SUCCESS, payload: data });
     dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data });
     localStorage.setItem("userInfo", JSON.stringify(data));
