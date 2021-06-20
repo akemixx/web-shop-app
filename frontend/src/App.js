@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Link, Route, useHistory } from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signOut } from "./actions/userActions";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
@@ -11,6 +11,7 @@ import ProductPage from "./pages/ProductPage";
 import ShippingAdressPage from "./pages/ShippingAdressPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -47,6 +48,9 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
+                    <Link to="/profile">User Profile</Link>
+                  </li>
+                  <li>
                     <Link to="/orderHistory">Order History</Link>
                   </li>
                   <li>
@@ -72,6 +76,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderPage} />
           <Route path="/order/:id" component={OrderPage} />
           <Route path="/orderHistory" component={OrderHistoryPage} />
+          <Route path="/profile" component={UserProfilePage} />
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>

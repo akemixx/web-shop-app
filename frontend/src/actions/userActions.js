@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  USER_DETAILS_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
   USER_SIGN_IN_FAIL,
   USER_SIGN_IN_REQUEST,
   USER_SIGN_IN_SUCCESS,
@@ -54,6 +57,29 @@ export const signUp = (name, email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_SIGN_UP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const detailsUser = (userId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
+  const {
+    userSignIn: { userInfo },
+  } = getState();
+  try {
+    const { data } = await axios.get(`api/users/${userInfo._id}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
