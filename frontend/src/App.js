@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Link, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route, useHistory } from "react-router-dom";
 import { signOut } from "./actions/userActions";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
 import OrderPage from "./pages/OrderPage";
 import PaymentMethodPage from "./pages/PaymentMethodPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
@@ -18,6 +19,7 @@ function App() {
   const { userInfo } = userSignIn;
 
   const dispatch = useDispatch();
+
   const signOutHandler = () => {
     dispatch(signOut());
   };
@@ -44,9 +46,14 @@ function App() {
                   {userInfo.name} <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
-                  <Link to="#signout" onClick={signOutHandler}>
-                    Sign Out
-                  </Link>
+                  <li>
+                    <Link to="/orderHistory">Order History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={signOutHandler}>
+                      Sign Out
+                    </Link>
+                  </li>
                 </ul>
               </div>
             ) : (
@@ -64,6 +71,7 @@ function App() {
           <Route path="/payment" component={PaymentMethodPage} />
           <Route path="/placeorder" component={PlaceOrderPage} />
           <Route path="/order/:id" component={OrderPage} />
+          <Route path="/orderHistory" component={OrderHistoryPage} />
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>
