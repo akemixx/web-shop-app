@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signOut } from "./actions/userActions";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
+import OrderPage from "./pages/OrderPage";
 import PaymentMethodPage from "./pages/PaymentMethodPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import ProductPage from "./pages/ProductPage";
@@ -62,6 +63,7 @@ function App() {
           <Route path="/shipping" component={ShippingAdressPage} />
           <Route path="/payment" component={PaymentMethodPage} />
           <Route path="/placeorder" component={PlaceOrderPage} />
+          <Route path="/order/:id" component={OrderPage} />
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>
