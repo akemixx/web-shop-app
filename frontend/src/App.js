@@ -12,6 +12,7 @@ import ShippingAdressPage from "./pages/ShippingAdressPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -76,7 +77,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderPage} />
           <Route path="/order/:id" component={OrderPage} />
           <Route path="/orderHistory" component={OrderHistoryPage} />
-          <Route path="/profile" component={UserProfilePage} />
+          <PrivateRoute path="/profile" component={UserProfilePage} />
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>
