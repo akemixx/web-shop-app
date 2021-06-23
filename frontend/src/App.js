@@ -13,6 +13,9 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import PrivateRoute from "./components/PrivateRoute";
+import ProductsListPage from "./pages/admin/ProductsListPage";
+import AdminRoute from "./components/AdminRoute";
+import ProductEditPage from "./pages/admin/ProductEditPage";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -42,6 +45,27 @@ function App() {
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Admin <i className="fa fa-caret-down" />
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/productsList">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orders">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/users">Users</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
@@ -68,7 +92,7 @@ function App() {
         </header>
         <main>
           <Route path="/" component={HomePage} exact />
-          <Route path="/product/:id" component={ProductPage} />
+          <Route path="/product/:id" component={ProductPage} exact />
           <Route path="/signIn" component={SignInPage} />
           <Route path="/signUp" component={SignUpPage} />
           <Route path="/cart/:id?" component={CartPage} />
@@ -78,6 +102,8 @@ function App() {
           <Route path="/order/:id" component={OrderPage} />
           <Route path="/orderHistory" component={OrderHistoryPage} />
           <PrivateRoute path="/profile" component={UserProfilePage} />
+          <AdminRoute path="/productsList" component={ProductsListPage} />
+          <AdminRoute path="/product/:id/edit" component={ProductEditPage} />
         </main>
         <footer className="row center">All rights reserved</footer>
       </div>
